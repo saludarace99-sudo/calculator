@@ -1,0 +1,70 @@
+using System;
+
+class Calculator 
+{
+    static void Main(string[] args)
+    {
+        bool running = true;
+
+        while (running)
+        {
+            (int num1, int num2) = ReadNumbers();
+
+            Console.Write("Choose operation (+, -, *, /, %, =): ");
+            string operation = Console.ReadLine();
+
+            if (operation == "=")
+            {
+                running = false;
+                continue;
+            }
+
+            PerformOperation(num1, num2, operation);
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("Calculator closed.");
+    }
+
+    static (int, int) ReadNumbers()
+    {
+        Console.Write("Enter 1st number: ");
+        int num1 = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter 2nd number: ");
+        int num2 = int.Parse(Console.ReadLine());
+
+        return (num1, num2);
+    }
+
+    static void PerformOperation(int num1, int num2, string operation)
+    {
+        switch (operation)
+        {
+            case "+":
+                Console.WriteLine("Result: " + (num1 + num2));
+                break;
+            case "-":
+                Console.WriteLine("Result: " + (num1 - num2));
+                break;
+            case "*":
+                Console.WriteLine("Result: " + (num1 * num2));
+                break;
+            case "/":
+                if (num2 == 0)
+                    Console.WriteLine("Cannot divide by zero");
+                else
+                    Console.WriteLine("Result: " + ((double)num1 / num2));
+                break;
+            case "%":
+                if (num2 == 0)
+                    Console.WriteLine("Cannot modulo by zero");
+                else
+                    Console.WriteLine("Result: " + (num1 % num2));
+                break;
+            default:
+                Console.WriteLine("Incorrect Operation Used, please try again");
+                break;
+        }
+    }
+}
